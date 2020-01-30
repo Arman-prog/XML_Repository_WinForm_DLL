@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<listofuniversity>
+  <university>
+    <id>0</id>
+    <name>YSU</name>
+    <address>Aleq Manukyan 1</address>    
+  </university>
+  <university>
+    <id>1</id>
+    <name>Politexnik</name>
+    <address>Teryan 105</address>    
+  </university>
+  <university>
+    <id>2</id>
+    <name>ASUE</name>
+    <address>Nalbandyan 128</address>
+  </university>
+  <university>
+    <id>3</id>
+    <name>ASPU</name>
+    <address>Tigran Mets 17</address>
+  </university>
+  <university>
+    <id>4</id>
+    <name>AUA</name>
+    <address>Baghramyan 40</address>
+  </university> 
+</listofuniversity>
