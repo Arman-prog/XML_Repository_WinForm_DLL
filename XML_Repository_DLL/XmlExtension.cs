@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 using XML_Repository.Attributes;
-using XML_Repository_DLL.Attributes;
 
 namespace XML_Repository
 {
@@ -27,7 +26,7 @@ namespace XML_Repository
                 var value = member.GetValue(model);
 
                 var dateformat = member.GetCustomAttribute<DateFormatAttribute>();
-                var idmember = member.GetCustomAttribute<IdAttribute>();
+                var idmember = member.GetCustomAttribute<KeyAttribute>();
                 if (dateformat != null)
                 {
                     if (DateTime.TryParse(value.ToString(), out DateTime date))
@@ -67,7 +66,7 @@ namespace XML_Repository
             var members = type
                 .GetProperties()
                 .Where(p => !p.IsIgnodred())
-                .Where(p => p.GetCustomAttribute<AgeIgnoreAttribute>() == null)
+                .Where(p => p.GetCustomAttribute<IgnoreAttribute>() == null)
                 .ToDictionary(p => p.Name.ToUpper(), p => p);
             foreach (XmlNode xchild in xnode.ChildNodes)
             {
@@ -80,7 +79,7 @@ namespace XML_Repository
                             member.SetValue(source, date);
                         }
                     }
-                    else if (member.GetCustomAttribute<IdAttribute>() != null)
+                    else if (member.GetCustomAttribute<KeyAttribute>() != null)
                     {
                         member.SetValue(source, int.Parse(xchild.InnerText));
                     }

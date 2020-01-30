@@ -4,7 +4,7 @@ namespace XML_Repository.Models
 {
    public class University
     {
-        [Id]
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }        

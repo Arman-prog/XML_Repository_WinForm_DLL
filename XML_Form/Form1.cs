@@ -11,6 +11,7 @@ using XML_Repository;
 using XML_Repository.Models;
 using System.Configuration;
 using System.Xml;
+using XML_Form.Views;
 
 namespace XML_Form
 {
@@ -68,19 +69,25 @@ namespace XML_Form
 
         private void Add_Button_Click(object sender, EventArgs e)//kisat e grvac
         {
-            TextBox fname = new TextBox() { Location = new Point(143, 307) };
-            TextBox lname = new TextBox() { Location = new Point(255, 307) };
-            TextBox bdate = new TextBox() { Location = new Point(367, 307) };
-            Button fnamebutton = new Button() { Location = new Point(150, 281), Text = "FirstName" };
-            Button lnamebutton = new Button() { Location = new Point(262, 281), Text = "LastName" };
-            Button bdatebutton = new Button() { Location = new Point(374, 281), Text = "BirthDate" };
-            this.Controls.Add(fname);
-            this.Controls.Add(lname);
-            this.Controls.Add(bdate);
-            this.Controls.Add(fnamebutton);
-            this.Controls.Add(lnamebutton);
-            this.Controls.Add(bdatebutton);
-            MessageBox.Show("Not ready yet this function");
+            //TextBox fname = new TextBox() { Location = new Point(143, 307) };
+            //TextBox lname = new TextBox() { Location = new Point(255, 307) };
+            //TextBox bdate = new TextBox() { Location = new Point(367, 307) };
+            //Button fnamebutton = new Button() { Location = new Point(150, 281), Text = "FirstName" };
+            //Button lnamebutton = new Button() { Location = new Point(262, 281), Text = "LastName" };
+            //Button bdatebutton = new Button() { Location = new Point(374, 281), Text = "BirthDate" };
+            //this.Controls.Add(fname);
+            //this.Controls.Add(lname);
+            //this.Controls.Add(bdate);
+            //this.Controls.Add(fnamebutton);
+            //this.Controls.Add(lnamebutton);
+            //this.Controls.Add(bdatebutton);
+            //MessageBox.Show("Not ready yet this function");
+            
+            var addModelForm = new AddStudentForm();
+            if (addModelForm.ShowDialog() == DialogResult.OK)
+            {
+                var model = addModelForm.Model;
+            }
         }
 
         private void Delete_Button_Click(object sender, EventArgs e)
@@ -129,29 +136,25 @@ namespace XML_Form
             switch (Model)
             {
                 case "Student":
-                    {
-                        StudentRepository.RemoveAll();
-                        StudentRepository.AddRange(StDict.Values);
-                        break;
-                    }
+                {
+                    StudentRepository.RemoveAll();
+                    StudentRepository.AddRange(StDict.Values);
+                    break;
+                }
 
                 case "Teacher":
-                    {
-                        XmlDocument xdoc = new XmlDocument();
-                        xdoc.Load(connectionstring.Text);
-                        xdoc.RemoveAll();
-                        xdoc.ToXml(TeDdict.Values, 0);
-                        break;
-                    }
+                {
+                    TeacherRepository.RemoveAll();
+                    TeacherRepository.AddRange(TeDdict.Values);
+                    break;
+                }
 
                 case "University":
-                    {
-                        XmlDocument xdoc = new XmlDocument();
-                        xdoc.Load(connectionstring.Text);
-                        xdoc.RemoveAll();
-                        xdoc.ToXml(UnDict.Values, 0);
-                        break;
-                    }
+                {
+                    UniversityRepository.RemoveAll();
+                    UniversityRepository.AddRange(UnDict.Values);
+                    break;
+                }
             }
             MessageBox.Show($"{Model}.xml saved");
         }

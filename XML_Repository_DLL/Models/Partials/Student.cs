@@ -3,16 +3,11 @@ using XML_Repository.Attributes;
 
 namespace XML_Repository.Models
 {
-   public class Teacher
+    public partial class Student
     {
-        [Key]
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string Lastname { get; set; }
         [Ignore]
         public string FullName => $"{FirstName} {Lastname}";
-        [DateFormat]
-        public DateTime BirthDate { get; set; }
+        [Ignore]
         public int Age
         {
             get
@@ -21,7 +16,6 @@ namespace XML_Repository.Models
                 return age.Days / 365;
             }
         }
-
         public override string ToString()
         {
             return $"{Id}\t{FirstName}\t{Lastname}\t{Age}";
