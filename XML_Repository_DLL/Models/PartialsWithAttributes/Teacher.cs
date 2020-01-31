@@ -3,16 +3,11 @@ using XML_Repository.Attributes;
 
 namespace XML_Repository.Models
 {
-   public class Teacher
+    public partial class Teacher
     {
-        [Key]
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string Lastname { get; set; }
         [Ignore]
         public string FullName => $"{FirstName} {Lastname}";
-        [DateFormat]
-        public DateTime BirthDate { get; set; }
+        [Ignore]
         public int Age
         {
             get

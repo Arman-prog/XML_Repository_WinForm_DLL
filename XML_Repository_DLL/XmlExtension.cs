@@ -8,7 +8,40 @@ namespace XML_Repository
 {
     public static class XmlExtension
     {
+        public static XmlNode ToXml<TModel>(this XmlDocument xdoc, TModel model)
+        {
+            Type type = model.GetType();
 
+            XmlNode node = xdoc.CreateNode(XmlNodeType.Element, type.Name.ToLower(), null);
+
+            var members = type
+                .GetProperties()
+                .Where(p => p.GetCustomAttribute<IgnoreAttribute>() == null)
+                .ToList();
+
+            foreach (PropertyInfo member in members)
+            {
+                XmlNode nodemember = xdoc.CreateElement(member.Name);
+                var value = member.GetValue(model);
+
+                var dateformat = member.GetCustomAttribute<DateFormatAttribute>();
+                if (dateformat != null)
+                {
+                    if (DateTime.TryParse(value.ToString(), out DateTime date))
+                    {
+                        nodemember.InnerText = date.ToString(dateformat.Value);
+                    }
+                }               
+                else
+                {
+                    nodemember.InnerText = value?.ToString();
+                }
+                node.AppendChild(nodemember);
+
+            }
+            return node;
+
+        }
         public static XmlNode ToXml<TModel>(this XmlDocument xdoc, TModel model, int id)
         {
             Type type = model.GetType();
@@ -66,7 +99,6 @@ namespace XML_Repository
             var members = type
                 .GetProperties()
                 .Where(p => !p.IsIgnodred())
-                .Where(p => p.GetCustomAttribute<IgnoreAttribute>() == null)
                 .ToDictionary(p => p.Name.ToUpper(), p => p);
             foreach (XmlNode xchild in xnode.ChildNodes)
             {
@@ -118,33 +150,24 @@ namespace XML_Repository
         }
 
 
-
         public static int GetMaxId(this XmlNode xnode)
         {
             int max = 0;
-            foreach (XmlNode xchild in xnode.ChildNodes)
+            foreach (XmlNode xchild in xnode.LastChild)
             {
-                if (xchild.HasChildNodes)
+                foreach (XmlNode childnode in xchild.ChildNodes)
                 {
-                    foreach (XmlNode childnode in xchild.ChildNodes)
+                    if (childnode.Name.ToLower() == "id")
                     {
-                        if (childnode.Name.ToLower() == "id")
+                        if (int.Parse(childnode.InnerText) > max)
                         {
-                            if (int.Parse(childnode.Value) > max)
-                            {
-                                max = int.Parse(childnode.Value);
-                            }
+                            max = int.Parse(childnode.InnerText);
                         }
                     }
-                }
-                else
-                {
-                    return 0;
-                }
 
+                }
             }
             return max;
-
         }
 
 

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <listofstudent>
   <student>
     <id>0</id>
@@ -35,5 +35,11 @@
     <firstname>Arsen</firstname>
     <lastname>Harutyunyan</lastname>
     <birthdate format="DD/MM/YYYY">11/10/1986</birthdate>
+  </student>
+  <student>
+    <Id>6</Id>
+    <FirstName>Nunufar</FirstName>
+    <Lastname>Gevorgyan</Lastname>
+    <BirthDate>31-01-2002</BirthDate>
   </student>
 </listofstudent>

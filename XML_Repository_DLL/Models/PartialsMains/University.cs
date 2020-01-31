@@ -2,16 +2,12 @@
 
 namespace XML_Repository.Models
 {
-   public class University
+   public partial class University
     {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }        
-
-        public override string ToString()
-        {
-            return $"{Id}\t{Name}\t{Address}";
-        }
+               
     }
 }

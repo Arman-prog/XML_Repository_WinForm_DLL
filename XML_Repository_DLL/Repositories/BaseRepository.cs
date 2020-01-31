@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Xml;
-using XML_Repository.Models;
 
 namespace XML_Repository
 {
@@ -40,7 +35,7 @@ namespace XML_Repository
                 Id = xdoc.GetMaxId();
             }
 
-            XmlNode xnode = xdoc.ToXml(model, Id);
+            XmlNode xnode = xdoc.ToXml(model, ++Id);
             xdoc.DocumentElement.AppendChild(xnode);
             xdoc.Save(FileName);
         }

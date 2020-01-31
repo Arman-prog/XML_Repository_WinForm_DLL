@@ -116,7 +116,7 @@
             this.connectionstring.Name = "connectionstring";
             this.connectionstring.Size = new System.Drawing.Size(135, 20);
             this.connectionstring.TabIndex = 11;
-            this.connectionstring.Text = "Enter Connection String";
+            this.connectionstring.Text = "Data\\Student.xml";
             this.connectionstring.TextChanged += new System.EventHandler(this.Connectionsting_TextChange);
             // 
             // Form1

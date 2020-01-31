@@ -1,4 +1,6 @@
-﻿namespace XML_Form.Views
+﻿using System.Windows.Forms;
+
+namespace XML_Form.Views
 {
     partial class AddStudentForm
     {
@@ -95,10 +97,10 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox NameTextBox;
-        private System.Windows.Forms.TextBox SurNameTextBox;
-        private System.Windows.Forms.Button OkButton;
-        private System.Windows.Forms.Button CancelButton;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private TextBox NameTextBox;
+        private TextBox SurNameTextBox;
+        private Button OkButton;
+        new private Button CancelButton;
+        private DateTimePicker dateTimePicker1;
     }
 }
