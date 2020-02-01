@@ -21,7 +21,7 @@ namespace XML_Form
         private TeacherRepository TeacherRepository { get; set; }
         private UniversityRepository UniversityRepository { get; set; }
         private Models Model { get; set; }
-        
+
 
 
         private void Student_Button_Click(object sender, EventArgs e)
@@ -59,13 +59,50 @@ namespace XML_Form
         }
 
         private void Add_Button_Click(object sender, EventArgs e)//kisat e grvac
-        {         
-
-            var addModelForm = new AddStudentForm();
-            if (addModelForm.ShowDialog() == DialogResult.OK)
+        {
+            switch (Model)
             {
-                var model = addModelForm.Model;
+                case Models.Student:
+                    {
+                        var addModelForm = new AddStudentForm();
+                        if (addModelForm.ShowDialog() == DialogResult.OK)
+                        {
+                            var model = addModelForm.Model;                            
+                           int maxKey= Context.Students.Keys.Max();
+                            model.Id = ++maxKey;
+                            Context.Students.Add(++maxKey, model);
+                            dataGridView1.DataSource = Context.Students.Values.ToList();
+                        }
+                        break;
+                    }
+                case Models.Teacher:
+                    {
+                        var addModelForm = new AddTeacherForm();
+                        if (addModelForm.ShowDialog() == DialogResult.OK)
+                        {
+                            var model = addModelForm.Model;
+                            int maxKey = Context.Teachers.Keys.Max();
+                            model.Id = ++maxKey;
+                            Context.Teachers.Add(++maxKey, model);
+                            dataGridView1.DataSource = Context.Teachers.Values.ToList();
+                        }
+                        break;
+                    }
+                case Models.University:
+                    {
+                        var addModelForm = new AddUniversityForm();
+                        if (addModelForm.ShowDialog() == DialogResult.OK)
+                        {
+                            var model = addModelForm.Model;
+                            int maxKey = Context.Universities.Keys.Max();
+                            model.Id = ++maxKey;
+                            Context.Universities.Add(++maxKey, model);
+                            dataGridView1.DataSource = Context.Universities.Values.ToList();
+                        }
+                        break;
+                    }
             }
+
         }
 
         private void Delete_Button_Click(object sender, EventArgs e)
@@ -115,7 +152,7 @@ namespace XML_Form
             {
                 case Models.Student:
                     {
-                       StudentRepository.RemoveAll();
+                        StudentRepository.RemoveAll();
                         StudentRepository.AddRange(Context.Students.Values);
                         break;
                     }
@@ -123,7 +160,7 @@ namespace XML_Form
                 case Models.Teacher:
                     {
                         TeacherRepository.RemoveAll();
-                       TeacherRepository.AddRange(Context.Teachers.Values);
+                        TeacherRepository.AddRange(Context.Teachers.Values);
                         break;
                     }
 

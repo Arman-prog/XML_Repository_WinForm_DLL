@@ -4,23 +4,22 @@ using XML_Repository.Models;
 
 namespace XML_Form.Views
 {
-    public partial class AddStudentForm : Form
+    public partial class AddTeacherForm : Form
     {
-        public Student Model { get; private set; }
-        public AddStudentForm()
+        public AddTeacherForm()
         {
             InitializeComponent();
         }
+        public Teacher Model { get; private set; }
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            Model = new Student
+            Model = new Teacher()
             {
                 FirstName = FirstNameTextBox.Text,
-                Lastname = LastNameTextBox.Text,            
+                Lastname = LastNameTextBox.Text,
                 BirthDate = dateTimePicker1.Value
             };
-            DialogResult = DialogResult.OK;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
